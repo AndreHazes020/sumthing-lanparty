@@ -20,15 +20,15 @@ export const DEFAULT_PACK = {
 export const GAMES = {
  quiz: {title:'Sumthing Doesn’t Add Up',short:'THE QUIZ',genre:'Company trivia',minutes:'8 min',color:'#c7f50a',icon:'?',description:'Big stories. Suspicious facts. Lock in your answer.'},
  bluff:{title:'The Usual Sumthings',short:'THE LEGENDS',genre:'Bluff & discover',minutes:'9 min',color:'#c7f50a',icon:'★',description:'Write a believable lie. Find the real company legend.'},
- kruger:{title:'Krugerplein Chaos',short:'THE OLD OFFICE',genre:'Multiplayer adventure',minutes:'18 min',color:'#c7f50a',icon:'⌂',description:'Move in. Meet the neighbours. Get everything out again.'},
+ kruger:{title:'Krugerplein Chaos',short:'THE OLD OFFICE',genre:'Neighbourhood RPG',minutes:'18 min',color:'#c7f50a',icon:'⌂',description:'A tiny office. A square full of characters. Your group writes the legend.'},
  restore:{title:'Restore Rush',short:'THE RESTORATION',genre:'Watch · Remember · Tap',minutes:'7 min',color:'#c7f50a',icon:'✳',description:'Watch the order. Repeat it fast. Bring a habitat back to life.'},
  sketch:{title:'Sumthing Sketchy',short:'THE DRAWING GAME',genre:'Draw & guess',minutes:'8 min',color:'#c7f50a',icon:'✎',description:'Bad drawings. Great memories. Guess what just happened.'}
 };
 export const CHAPTERS = [
- {title:'01 · Moving in',subtitle:'Help Guido make room for the beginning of Sumthing.',instruction:'Find an old item or unwanted occupant at the office. Carry or guide them to the exit marker.',seconds:150},
- {title:'02 · Marktplaats empire',subtitle:'A beautiful office. A questionable furniture budget.',instruction:'Collect finds around the square and deliver them to the office. A sofa needs a second player nearby to help lift.',seconds:150},
- {title:'03 · Meet the neighbours',subtitle:'Keep the office running and make friends on the square.',instruction:'Pick up an errand and follow its destination. Help Hedi print, organise the BBQ, visit Karima, and return boules. Redirect walk-in visitors at the office.',seconds:240},
- {title:'04 · The great move',subtitle:'Next stop: the laboratory beside Hortus Botanicus.',instruction:'Move office furniture to the van. Work together on the sofa. Watch out for cartoon moving-day mischief: recover dropped items!',seconds:180}
+ {title:'01 · The beginning',subtitle:'Every great company starts with a door that barely closes.',instruction:'Meet Guido and negotiate with the unexpected housemate. Everyone chooses the dialogue together.',seconds:240},
+ {title:'02 · Furnished with ambition',subtitle:'The furniture is free. The emotional cost is not.',instruction:'Visit the Marktplaats oracle, then confront the sofa situation at the office.',seconds:240},
+ {title:'03 · You live here now',subtitle:'Coffee, paper jams, BBQ and extremely competitive retirement.',instruction:'Meet Karima, Hedi, the upstairs neighbour and the boules gentleman. Choose your replies as a group.',seconds:360},
+ {title:'04 · One van. Five years.',subtitle:'Leaving the square. Taking the stories.',instruction:'Handle one last walk-in applicant, then get the van ready for Hortus.',seconds:240}
 ];
 export const COLORS=['#d9f86e','#ef9db9','#89cfe9','#d0b2f3','#ffbd7e','#8cdbc0','#e9dd9c','#ef8c84','#a3b5f5','#d6d8ce'];
 export function validatePack(p){

@@ -1,5 +1,9 @@
 # Sumthing LAN Party content collection guide
 
+## Krugerplein RPG update
+
+Krugerplein now plays as a four-chapter Game Boy inspired conversation adventure. Twelve encounters offer three group replies each, different souvenir outcomes, and shared shutter, sofa, printer and moving-van challenges. Supply each neighbour’s real expressions, a specific incident, a memorable object and how the story ended. Current dialogue is explicitly invented arcade material. The solo preview has a chapter selector for immediate testing.
+
 Sumthing LAN Party content collection guide
 
 Five year anniversary edition  |  Prepared for Guido  |  30 October 2026
