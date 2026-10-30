@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A little friendly competition. A lot of team spirit.">
+  <meta name="theme-color" content="#151d30">
+  <title>Sumthing LAN Party — Company game</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 60'%3E%3Crect width='60' height='60' rx='16' fill='%23c7f36b'/%3E%3Ctext x='30' y='43' text-anchor='middle' font-size='40'%3E✳%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./config.js" defer></script>
+  <script src="./app.js" defer></script>
+</head>
+<body>
+  <header class="topbar"><a class="brand" href="./" aria-label="Sumthing LAN Party home"><span class="brand-icon" aria-hidden="true">✳</span> <span id="brand-name">Sumthing LAN Party</span></a><span class="demo-badge">DEMO EDITION</span></header>
+  <main>
+    <section class="intro">
+      <p class="eyebrow"><span class="dot"></span> A LITTLE FRIENDLY COMPETITION</p>
+      <h1>Big team.<br>Even bigger<br><span>game energy.</span></h1>
+      <p class="intro-copy" id="intro-copy">Take a break. Put your knowledge to the test. Make your next team moment a little more playful.</p>
+      <div class="facts"><div><strong id="question-count">03</strong><span>quick questions</span></div><div><strong>100</strong><span>points per answer</span></div><div><strong>∞</strong><span>team spirit</span></div></div>
+      <div class="orbit-art" aria-hidden="true"><span class="orbit"></span><span class="spark">✳</span><span class="pill">LET’S PLAY ↗</span><span class="small-star">✦</span></div>
+    </section>
+    <section class="game-panel" aria-label="Game">
+      <div class="panel-top"><span id="stage-label">THE WARM-UP</span><span class="edition">01 / SUMTHING LAN PARTY</span></div>
+      <div id="welcome">
+        <div class="card-icon" aria-hidden="true">↗</div>
+        <h2>You’re up.</h2>
+        <p class="muted">Pick your player name and try the first round.</p>
+        <form id="join-form">
+          <label for="player-name">PLAYER NAME</label>
+          <input id="player-name" name="player" placeholder="What should we call you?" autocomplete="nickname" maxlength="32" required pattern=".*\S.*" title="Enter a player name with at least one non-space character.">
+          <button class="primary" type="submit">Let’s play <span aria-hidden="true">→</span></button>
+        </form>
+        <p class="fine-print">No account needed. This demo runs on your device.</p>
+      </div>
+      <div id="round" hidden>
+        <div class="round-meta"><span id="round-count"></span><span id="score">0 PTS</span></div>
+        <div class="progress-track"><div id="progress"></div></div>
+        <h2 id="question" tabindex="-1"></h2>
+        <div id="answers" class="answers"></div>
+        <p id="feedback" class="feedback" role="status"></p>
+        <button id="next" class="primary" hidden>Next question <span aria-hidden="true">→</span></button>
+      </div>
+      <div id="results" hidden>
+        <div class="card-icon" aria-hidden="true">✦</div>
+        <p class="eyebrow">ROUND COMPLETE</p>
+        <h2 id="result-title" tabindex="-1"></h2>
+        <p class="big-score" id="final-score"></p>
+        <p class="muted" id="result-copy"></p>
+        <button id="replay" class="primary">Play again <span aria-hidden="true">↻</span></button>
+        <button id="share" class="secondary">Copy game link</button>
+        <p id="share-status" class="fine-print" role="status"></p>
+      </div>
+      <div class="panel-bottom"><span class="dot"></span> <span>Sample questions · Your company edition comes next</span></div>
+    </section>
+  </main>
+  <footer><span id="footer-brand">SUMTHING LAN PARTY</span><span>Good people. Great competition.</span><span>Built for your next team moment ↗</span></footer>
+  <noscript><p class="noscript">Please enable JavaScript to play this game.</p></noscript>
+</body>
+</html>
