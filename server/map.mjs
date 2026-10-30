@@ -14,10 +14,10 @@ export const MAP={width:1000,height:926,
  ],
  square:[[350,435],[415,346],[500,310],[577,349],[602,442],[564,554],[472,589],[369,540]],
  roads:[[[440,0],[502,130],[520,228],[600,359],[608,464],[566,552],[650,663],[724,718],[822,926]],[[0,459],[177,481],[303,493],[367,433],[425,300],[506,272],[710,207],[1000,120]],[[202,926],[288,731],[352,609],[389,553]]],
- office:{x:426,y:585},cafe:{x:474,y:610},caravan:{x:381,y:550},basnoe:{x:467,y:180},boules:{x:505,y:405},fountain:{x:491,y:491},bbq:{x:372,y:610},van:{x:374,y:519},exit:{x:448,y:532},printer:{x:440,y:588},
+ interior:{x:343,y:590,w:104,h:80},door:{x:426,y:582},office:{x:426,y:585},cafe:{x:474,y:610},caravan:{x:381,y:550},basnoe:{x:467,y:180},boules:{x:505,y:405},fountain:{x:491,y:491},bbq:{x:372,y:610},van:{x:374,y:519},exit:{x:448,y:532},printer:{x:440,y:588},
  trees:[[409,366],[442,350],[491,348],[545,361],[567,395],[574,438],[552,476],[541,536],[492,556],[439,540],[384,509],[370,468],[377,419],[436,451],[530,321],[297,405],[318,367],[352,319],[363,270],[570,181],[709,200],[801,174],[884,142]]
 };
 export const distance=(a,b)=>Math.hypot(a.x-b.x,a.y-b.y);
 export function inPolygon(p,poly){let inside=false;for(let i=0,j=poly.length-1;i<poly.length;j=i++){const a=poly[i],b=poly[j];if(((a[1]>p.y)!==(b[1]>p.y))&&(p.x<(b[0]-a[0])*(p.y-a[1])/(b[1]-a[1])+a[0]))inside=!inside;}return inside;}
-export function walkable(p){return p.x>15&&p.x<985&&p.y>15&&p.y<911&&!MAP.buildings.some(poly=>inPolygon(p,poly));}
+export function walkable(p){const o=MAP.interior;if(p.x>o.x+3&&p.x<o.x+o.w-3&&p.y>o.y+3&&p.y<o.y+o.h-3)return true;if(p.x>409&&p.x<443&&p.y>565&&p.y<610)return true;return p.x>15&&p.x<985&&p.y>15&&p.y<911&&!MAP.buildings.some(poly=>inPolygon(p,poly));}
 export function npcPositions(chapter,now){const secs=now/1000;const roles=[['Karima',MAP.caravan,'#bb7b53'],['Boules neighbour',MAP.boules,'#bbc5d2'],['BBQ neighbour',MAP.bbq,'#ef9cb5'],['Hedi',{x:450,y:560},'#8ec7d4'],['Police',{x:565,y:553},'#6d89ae'],['Café regular',{x:492,y:566},'#d5b28e']];if(chapter===3)roles.push(['Mischief',{x:395,y:526},'#a18bd0']);return roles.map(([name,p,color],i)=>({name,color,x:p.x+Math.sin(secs*.32+i)*12,y:p.y+Math.cos(secs*.28+i)*9}));}

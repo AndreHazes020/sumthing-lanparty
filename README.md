@@ -23,7 +23,7 @@ A one-player practice-room option is available on the landing page. The host mus
 - **Sumthing Doesn’t Add Up:** phone answers, timed quiz, story reveals and authoritative scoring.
 - **The Usual Sumthings:** private bluff writing, anonymous voting, truth reveals and deception points.
 - **Krugerplein Chaos:** shared movement, exclusive item claims, deliveries, cooperative sofa pickup, neighbourhood errands and recoverable moving-day mischief across four chapters.
-- **Restore Rush:** clear litter, plant and water trees, grow coral, rescue habitats during heatwaves and collect golden seeds. Manage energy and chain combos while restoring a shared landscape.
+- **Restore Rush:** watch the order of four nature actions on the TV, then repeat it on large phone buttons. Correct patterns restore habitats; longer patterns, speed bonuses and streaks raise the challenge.
 - **Sumthing Sketchy:** private prompts, touch drawing, shared drawing gallery, guesses and host acceptance of close answers.
 
 This first version uses **clearly identified sample content**. Actual character portraits, company stories, office interiors and project-specific restoration art still require the material in [the collection guide](CONTENT_GUIDE.md).
@@ -72,4 +72,4 @@ Imagery reference: PDOK / Beeldmateriaal, CC BY 4.0, [PDOK Viewer](https://app.p
 
 ## Validation and event rehearsal
 
-The tests cover player limits, private answers, scoring, restoration growth, energy, care and hazards, bluff authorship, drawings, exclusive deliveries, concurrency, host authorization and CORS. Rehearse all five games with the actual phones and event Wi-Fi before the celebration. This is a playable first edition, not a completed one-hour content pack or a load-tested production event service.
+The tests cover player limits, private answers, scoring, ordered restoration patterns, retries and duplicate submissions, bluff authorship, drawings, exclusive deliveries, concurrency, host authorization and CORS. Rehearse all five games with the actual phones and event Wi-Fi before the celebration. This is a playable first edition, not a completed one-hour content pack or a load-tested production event service.

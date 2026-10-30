@@ -30,8 +30,8 @@ jobs:
       - name: Prepare browser app
         run: |
           mkdir -p _site/server _site/assets
-          cp index.html app.js settings.js styles.css .nojekyll _site/
-          cp server/content.mjs server/map.mjs server/engine.mjs server/restoration.mjs _site/server/
+          cp index.html app.js kruger-client.mjs settings.js styles.css .nojekyll _site/
+          cp server/content.mjs server/map.mjs server/engine.mjs server/restoration.mjs server/navigation.mjs _site/server/
           cp assets/* _site/assets/
       - uses: actions/upload-pages-artifact@v3
         with:

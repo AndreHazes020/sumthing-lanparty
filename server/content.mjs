@@ -21,7 +21,7 @@ export const GAMES = {
  quiz: {title:'Sumthing Doesn’t Add Up',short:'THE QUIZ',genre:'Company trivia',minutes:'8 min',color:'#c7f50a',icon:'?',description:'Big stories. Suspicious facts. Lock in your answer.'},
  bluff:{title:'The Usual Sumthings',short:'THE LEGENDS',genre:'Bluff & discover',minutes:'9 min',color:'#c7f50a',icon:'★',description:'Write a believable lie. Find the real company legend.'},
  kruger:{title:'Krugerplein Chaos',short:'THE OLD OFFICE',genre:'Multiplayer adventure',minutes:'18 min',color:'#c7f50a',icon:'⌂',description:'Move in. Meet the neighbours. Get everything out again.'},
- restore:{title:'Restore Rush',short:'THE RESTORATION',genre:'Restore · Grow · Survive',minutes:'7 min',color:'#c7f50a',icon:'✳',description:'Race heatwaves and litter tides. Grow a forest. Bring the reef back.'},
+ restore:{title:'Restore Rush',short:'THE RESTORATION',genre:'Watch · Remember · Tap',minutes:'7 min',color:'#c7f50a',icon:'✳',description:'Watch the order. Repeat it fast. Bring a habitat back to life.'},
  sketch:{title:'Sumthing Sketchy',short:'THE DRAWING GAME',genre:'Draw & guess',minutes:'8 min',color:'#c7f50a',icon:'✎',description:'Bad drawings. Great memories. Guess what just happened.'}
 };
 export const CHAPTERS = [
