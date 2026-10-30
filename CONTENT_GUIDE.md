@@ -125,7 +125,7 @@ Open the official aerial imagery viewer
 
 ### Restore Rush
 
-Choose three to five actual projects or ecosystems. The five touch actions are planting, holding and releasing to water, swiping litter into a bin, timing coral placement and tracing a pollinator route.
+Choose three to five actual projects or ecosystems. Players clear litter, plant and water trees, grow coral, rescue habitats during heatwaves and collect golden seeds. Energy and combo bonuses add choices while everyone restores one landscape.
 
 [ ] Project name, country or location, and the ecosystem being restored.
 

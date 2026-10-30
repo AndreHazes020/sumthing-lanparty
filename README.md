@@ -4,6 +4,10 @@ Five anniversary minigames for **3–10 players**, controlled from phones with a
 
 **[Open the arcade](https://andrehazes020.github.io/sumthing-lanparty/)**
 
+## Preview every game
+
+Open [the preview arcade](https://andrehazes020.github.io/sumthing-lanparty/?preview=all). Each card starts a playable solo preview with two simulated teammates. The previews run entirely in your browser, use the same rules as multiplayer, and do not create a shared room. Use the selector to switch games, skip phases, restart, or toggle the TV view. Feedback notes stay on your device; copy them into the chat when ready.
+
 ## Play
 
 1. Open the arcade on the shared laptop/TV and choose **Host a party**.
@@ -19,7 +23,7 @@ A one-player practice-room option is available on the landing page. The host mus
 - **Sumthing Doesn’t Add Up:** phone answers, timed quiz, story reveals and authoritative scoring.
 - **The Usual Sumthings:** private bluff writing, anonymous voting, truth reveals and deception points.
 - **Krugerplein Chaos:** shared movement, exclusive item claims, deliveries, cooperative sofa pickup, neighbourhood errands and recoverable moving-day mischief across four chapters.
-- **Restore Rush:** tap to plant, hold/release to water, swipe litter, time coral placement and trace flowers. Shared restoration progress and individual scores.
+- **Restore Rush:** clear litter, plant and water trees, grow coral, rescue habitats during heatwaves and collect golden seeds. Manage energy and chain combos while restoring a shared landscape.
 - **Sumthing Sketchy:** private prompts, touch drawing, shared drawing gallery, guesses and host acceptance of close answers.
 
 This first version uses **clearly identified sample content**. Actual character portraits, company stories, office interiors and project-specific restoration art still require the material in [the collection guide](CONTENT_GUIDE.md).
@@ -51,7 +55,7 @@ Open `http://127.0.0.1:8000`. The local server uses an in-memory SQLite database
 
 GitHub Pages serves the browser app and the hosted backend maintains shared rooms in Cloudflare D1 through Sites. `settings.js` points at the deployed API. Room and player secrets never appear in join URLs; the backend stores their SHA-256 hashes, authorizes host operations and omits answer keys until reveal. The shared state uses optimistic concurrency with retry and one-second polling; local movement is animated between updates.
 
-The Pages workflow runs the nine rule/API tests before deploying only public browser assets. The source for all game rules and API authorization is in `server/`. `deploy/` contains the deployed Sites route adapter, schema migration and hosting manifest. The Sites deployment uses its maintained Vinext starter and D1 binding `DB`.
+The Pages workflow runs the eleven rule/API tests before deploying only public browser assets. The source for all game rules and API authorization is in `server/`. `deploy/` contains the deployed Sites route adapter, schema migration and hosting manifest. The Sites deployment uses its maintained Vinext starter and D1 binding `DB`.
 
 ## Krugerplein references
 
@@ -68,4 +72,4 @@ Imagery reference: PDOK / Beeldmateriaal, CC BY 4.0, [PDOK Viewer](https://app.p
 
 ## Validation and event rehearsal
 
-The tests cover player limits, private answers, scoring, all restoration gestures, bluff authorship, drawings, exclusive deliveries, concurrency, host authorization and CORS. Rehearse all five games with the actual phones and event Wi-Fi before the celebration. This is a playable first edition, not a completed one-hour content pack or a load-tested production event service.
+The tests cover player limits, private answers, scoring, restoration growth, energy, care and hazards, bluff authorship, drawings, exclusive deliveries, concurrency, host authorization and CORS. Rehearse all five games with the actual phones and event Wi-Fi before the celebration. This is a playable first edition, not a completed one-hour content pack or a load-tested production event service.

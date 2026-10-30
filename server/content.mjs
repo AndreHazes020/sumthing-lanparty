@@ -18,11 +18,11 @@ export const DEFAULT_PACK = {
   ecosystems: [ {name:'Forest', action:'plant'}, {name:'Wetland',action:'water'}, {name:'Coast',action:'clean'}, {name:'Reef',action:'coral'}, {name:'Meadow',action:'trace'} ]
 };
 export const GAMES = {
- quiz: {title:'Sumthing Doesn’t Add Up',short:'THE QUIZ',genre:'Company trivia',minutes:'8 min',color:'#d9f86e',icon:'?',description:'Big stories. Suspicious facts. Lock in your answer.'},
- bluff:{title:'The Usual Sumthings',short:'THE LEGENDS',genre:'Bluff & discover',minutes:'9 min',color:'#c8a9ed',icon:'★',description:'Write a believable lie. Find the real company legend.'},
- kruger:{title:'Krugerplein Chaos',short:'THE OLD OFFICE',genre:'Multiplayer adventure',minutes:'18 min',color:'#ffc38c',icon:'⌂',description:'Move in. Meet the neighbours. Get everything out again.'},
- restore:{title:'Restore Rush',short:'THE RESTORATION',genre:'Touch & timing',minutes:'7 min',color:'#9cddd1',icon:'✳',description:'One shared landscape. Five ways to bring it back to life.'},
- sketch:{title:'Sumthing Sketchy',short:'THE DRAWING GAME',genre:'Draw & guess',minutes:'8 min',color:'#f0b3ca',icon:'✎',description:'Bad drawings. Great memories. Guess what just happened.'}
+ quiz: {title:'Sumthing Doesn’t Add Up',short:'THE QUIZ',genre:'Company trivia',minutes:'8 min',color:'#c7f50a',icon:'?',description:'Big stories. Suspicious facts. Lock in your answer.'},
+ bluff:{title:'The Usual Sumthings',short:'THE LEGENDS',genre:'Bluff & discover',minutes:'9 min',color:'#c7f50a',icon:'★',description:'Write a believable lie. Find the real company legend.'},
+ kruger:{title:'Krugerplein Chaos',short:'THE OLD OFFICE',genre:'Multiplayer adventure',minutes:'18 min',color:'#c7f50a',icon:'⌂',description:'Move in. Meet the neighbours. Get everything out again.'},
+ restore:{title:'Restore Rush',short:'THE RESTORATION',genre:'Restore · Grow · Survive',minutes:'7 min',color:'#c7f50a',icon:'✳',description:'Race heatwaves and litter tides. Grow a forest. Bring the reef back.'},
+ sketch:{title:'Sumthing Sketchy',short:'THE DRAWING GAME',genre:'Draw & guess',minutes:'8 min',color:'#c7f50a',icon:'✎',description:'Bad drawings. Great memories. Guess what just happened.'}
 };
 export const CHAPTERS = [
  {title:'01 · Moving in',subtitle:'Help Guido make room for the beginning of Sumthing.',instruction:'Find an old item or unwanted occupant at the office. Carry or guide them to the exit marker.',seconds:150},

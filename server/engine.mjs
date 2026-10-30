@@ -1,5 +1,7 @@
+import {beginRestoration,restorationTick,restoreHits,energy} from './restoration.mjs';
 import {DEFAULT_PACK,GAMES,CHAPTERS,COLORS,validatePack} from './content.mjs';
 import {MAP,distance,walkable,npcPositions} from './map.mjs';
+const guessNorm=s=>norm(String(s).replace(/^(the|an|a|de|het|een)\s+/i,''));
 const norm=s=>String(s).toLowerCase().normalize('NFKD').replace(/[^a-z0-9]/g,'');
 const fail=s=>{throw Error(s)};
 export const token=()=>crypto.randomUUID()+crypto.randomUUID();
@@ -33,7 +35,7 @@ function startChapter(r,now){const g=r.game;g.phase='chapter';g.deadline=now+CHA
 function end(r,now){const g=r.game;g.phase='results';g.deadline=null;g.finished=now;r.history.push({type:g.type,at:now,winners:winners(r),scores:r.players.map(p=>({name:p.name,score:p.score}))});r.history=r.history.slice(-20);}
 export function winners(r){const max=Math.max(0,...r.players.map(p=>p.score));return r.players.filter(p=>p.score===max).map(p=>p.name);}
 export function tick(r,now=Date.now()){
- const g=r.game;if(!g||g.phase==='results')return false;let changed=false;
+ const g=r.game;if(!g||g.phase==='results')return false;let changed=false;if(g.type==='restore'&&g.phase==='restore'&&!g.cells){beginRestoration(r,now);changed=true;}if(g.type==='restore'&&g.phase==='restore'&&now<g.deadline)changed=restorationTick(r,now)||changed;
  if(g.type==='kruger'&&g.phase==='chapter'&&g.chapter===2&&now>=g.visitorAt){g.visitors=g.visitors.filter(v=>v.expires>now);if(g.visitors.length<3)g.visitors.push({id:crypto.randomUUID(),x:475,y:553,expires:now+18000});g.visitorAt=now+17000;changed=true;}
  if(g.type==='kruger'&&g.phase==='chapter'&&g.chapter===3&&now>=g.theftAt){const loose=g.tasks.find(t=>!t.done&&!t.owner);if(loose){loose.x=505;loose.y=289;g.log.unshift(`Moving-day mischief! Recover the ${loose.name} near the north crossing.`);g.log=g.log.slice(0,4);}g.theftAt=now+20000;changed=true;}
  if(g.deadline&&now>=g.deadline){changed=true;if(g.type==='quiz'){for(const p of r.players)if(g.answers[p.id]===r.pack.quiz[g.index].correct)p.score+=100;g.phase='reveal';g.deadline=null;}
@@ -52,7 +54,7 @@ export function hostAction(r,a,now=Date.now()){
   for(const p of r.players){p.score=0;p.task=0;p.gesture=null;p.seq=-1;}
   const duration=Math.max(30,Math.min(360,Number(a.duration)||300));
   r.game={type:a.game,phase:'',index:0,chapter:0,started:now,duration,log:[]};
-  if(a.game==='quiz')beginQuestion(r,now);if(a.game==='bluff')beginBluff(r,now);if(a.game==='kruger')startChapter(r,now);if(a.game==='sketch')startSketch(r,now);if(a.game==='restore'){r.game.phase='restore';r.game.deadline=now+duration*1000;r.game.progress=0;r.game.target=r.players.length*25;for(const p of r.players)p.challengeAt=now;}
+  if(a.game==='quiz')beginQuestion(r,now);if(a.game==='bluff')beginBluff(r,now);if(a.game==='kruger')startChapter(r,now);if(a.game==='sketch')startSketch(r,now);if(a.game==='restore'){r.game.phase='restore';r.game.deadline=now+duration*1000;r.game.progress=0;r.game.target=r.players.length*25;for(const p of r.players)p.challengeAt=now;beginRestoration(r,now);}
   return;
  }
  const g=r.game;if(!g)fail('Select a game first.');
@@ -78,18 +80,9 @@ export function playerAction(r,p,a,now=Date.now()){
  }
  if(a.type==='guess'&&g.type==='sketch'&&g.phase==='guess'){
   const artist=r.players[g.artist];if(p.id===artist.id)fail('You drew this one!');g.attempts??={};const key=g.artist+':'+p.id;g.attempts[key]=(g.attempts[key]||0)+1;if(g.attempts[key]>8)fail('Eight guesses used. Wait for the reveal.');
-  const text=String(a.text||'').trim().slice(0,120);g.guesses[p.id]=text;if(norm(text)===norm(g.prompts[artist.id])&&!g.correctGuessers.includes(p.id)){g.correctGuessers.push(p.id);p.score+=100;artist.score+=Math.round(100/Math.max(1,r.players.length-1));}return;
+  const text=String(a.text||'').trim().slice(0,120);g.guesses[p.id]=text;if(guessNorm(text)===guessNorm(g.prompts[artist.id])&&!g.correctGuessers.includes(p.id)){g.correctGuessers.push(p.id);p.score+=100;artist.score+=Math.round(100/Math.max(1,r.players.length-1));}return;
  }
- if(a.type==='gesture'&&g.type==='restore'&&g.phase==='restore'){
-  const kind=p.task%5;if(a.step==='begin'){p.gesture={at:now,task:p.task};return;}
-  if(a.task!==p.task)fail('That action is already complete.');if(now-(p.lastGesture||0)<180)fail('One action at a time.');let points=0;
-  if(kind===0){if(a.site!==p.task%4)fail('Tap the glowing planting spot.');points=60;}
-  if(kind===1){if(p.gesture?.task!==p.task)fail('Hold to start watering.');const duration=now-p.gesture.at;points=Math.max(10,100-Math.round(Math.abs(duration-1200)/15));}
-  if(kind===2){if(a.direction!=='right')fail('Swipe the litter towards the bin on the right.');points=70;}
-  if(kind===3){const phase=((now-p.challengeAt)%1800)/1800;points=Math.max(15,100-Math.round(Math.abs(phase-.5)*200));}
-  if(kind===4){if(a.path!=='0123')fail('Trace the four flowers in order.');points=90;}
-  p.score+=points;p.task++;p.challengeAt=now;p.lastGesture=now;p.gesture=null;g.progress++;return;
- }
+ if(a.type==='restore'&&g.type==='restore'&&g.phase==='restore'){restoreHits(r,p,a.hits,now);return;}
  if(g.type==='kruger'&&g.phase==='chapter'){
   if(a.type==='move'){
    if(!Number.isInteger(a.seq)||a.seq<=p.seq)return;const target={x:Number(a.x),y:Number(a.y)};if(!Number.isFinite(target.x)||!Number.isFinite(target.y))return;
@@ -108,12 +101,12 @@ export function playerAction(r,p,a,now=Date.now()){
 }
 export function view(r,identity,now=Date.now()){
  const host=identity===r.hostHash,me=r.players.find(p=>p.tokenHash===identity);if(!host&&!me)fail('Rejoin this room to continue.');
- const g=r.game;const out={code:r.code,revision:r.revision,serverNow:now,expires:r.expires,practice:r.practice,sample:r.pack.sample,title:r.pack.title,me:me?.id||null,host,players:r.players.map(({tokenHash,gesture,seq,...p})=>({...p,online:now-p.seen<20000})),history:r.history,game:null};
+ const g=r.game;const out={code:r.code,revision:r.revision,serverNow:now,expires:r.expires,practice:r.practice,sample:r.pack.sample,title:r.pack.title,me:me?.id||null,host,players:r.players.map(({tokenHash,gesture,seq,...p})=>({...p,online:now-p.seen<20000,...(r.game?.type==='restore'?{energy:energy(p,now)}:{})})),history:r.history,game:null};
  if(!g)return out;
  const base={type:g.type,phase:g.phase,index:g.index,chapter:g.chapter,deadline:g.deadline,started:g.started};
  if(g.type==='quiz'){const q=r.pack.quiz[g.index];Object.assign(base,{total:r.pack.quiz.length,question:q?.question,answers:q?.answers,answered:Object.keys(g.answers||{}),myAnswer:g.answers?.[me?.id]});if(['reveal','results'].includes(g.phase))Object.assign(base,{correct:q?.correct,story:q?.story});}
  if(g.type==='bluff'){const c=r.pack.characters[g.index];Object.assign(base,{total:r.pack.characters.length,character:{name:c?.name,description:c?.description,prompt:c?.prompt},submitted:Object.keys(g.bluffs||{}),myBluff:g.bluffs?.[me?.id],voted:Object.keys(g.votes||{}),myVote:g.votes?.[me?.id]});if(g.phase!=='write')base.options=g.options.map(o=>({id:o.id,text:o.text,mine:o.owner===me?.id,...(['reveal','results'].includes(g.phase)?{owner:o.owner,truth:!o.owner}:{} )}));if(['reveal','results'].includes(g.phase))Object.assign(base,{truth:c?.truth,story:c?.story,votes:g.votes});}
- if(g.type==='restore')Object.assign(base,{progress:g.progress,target:g.target,ecosystems:r.pack.ecosystems});
+ if(g.type==='restore')Object.assign(base,{progress:g.progress,target:g.target,ecosystems:r.pack.ecosystems,cells:g.cells,event:g.event,popups:g.popups,nextEvent:g.nextEvent});
  if(g.type==='sketch'){const artist=r.players[g.artist];Object.assign(base,{submitted:Object.keys(g.drawings||{}),myPrompt:g.phase==='draw'?g.prompts?.[me?.id]:undefined,artist:artist?.id,drawing:g.phase!=='draw'?g.drawings?.[artist?.id]:undefined,correctGuessers:g.correctGuessers||[],myGuess:g.guesses?.[me?.id]});if(['reveal','results'].includes(g.phase))base.prompt=g.prompts?.[artist?.id];if(host&&g.phase==='reveal')base.guesses=g.guesses;}
  if(g.type==='kruger')Object.assign(base,{tasks:g.tasks,visitors:g.visitors?.filter(v=>v.expires>now),log:g.log,npcs:npcPositions(g.chapter,now),chapterInfo:CHAPTERS[g.chapter]});
  if(g.phase==='results')base.winners=winners(r);
