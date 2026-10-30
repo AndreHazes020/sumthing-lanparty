@@ -1,4 +1,4 @@
-name: Deploy game to GitHub Pages
+name: Deploy Sumthing LAN Party
 on:
   push:
     branches: [main]
@@ -18,22 +18,24 @@ jobs:
       pages: write
       id-token: write
     steps:
-      - name: Check out source
-        uses: actions/checkout@v4
-      - name: Check JavaScript syntax
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Verify game rules and multiplayer API
+        run: node --test tests/*.test.mjs
+      - name: Check browser JavaScript
+        run: node --check app.js
+      - uses: actions/configure-pages@v5
+      - name: Prepare browser app
         run: |
-          node --check app.js
-          node --check config.js
-      - name: Configure Pages
-        uses: actions/configure-pages@v5
-      - name: Prepare website
-        run: |
-          mkdir _site
-          cp index.html styles.css app.js config.js .nojekyll _site/
-      - name: Upload website
-        uses: actions/upload-pages-artifact@v3
+          mkdir -p _site/server _site/assets
+          cp index.html app.js settings.js styles.css .nojekyll _site/
+          cp server/content.mjs server/map.mjs _site/server/
+          cp assets/qrcode.js _site/assets/
+      - uses: actions/upload-pages-artifact@v3
         with:
           path: _site
-      - name: Deploy
+      - name: Publish
         id: deployment
         uses: actions/deploy-pages@v4
