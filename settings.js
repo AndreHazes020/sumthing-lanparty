@@ -1,1 +1,1 @@
-window.LANPARTY_API='https://sumthing-lanparty.foggyoak18.chatgpt.site/api/room';
+window.LANPARTY_API='https://sumthing-lanparty.guido677492.chatgpt.site/api/room';

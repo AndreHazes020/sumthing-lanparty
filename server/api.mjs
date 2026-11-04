@@ -1,5 +1,5 @@
 import {createRoom,joinRoom,hostAction,playerAction,tick,view,token,hash} from './engine.mjs';
-const ALLOWED=['https://andrehazes020.github.io','https://sumthing-lanparty.foggyoak18.chatgpt.site'];
+const ALLOWED=['https://andrehazes020.github.io','https://sumthing-lanparty.guido677492.chatgpt.site','https://sumthing-lanparty.foggyoak18.chatgpt.site'];
 export async function handle(request,db){
  const origin=request.headers.get('origin');const local=origin&&/^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(origin);
  const headers={'Content-Type':'application/json','Cache-Control':'no-store','Vary':'Origin'};if(ALLOWED.includes(origin)||local){headers['Access-Control-Allow-Origin']=origin;headers['Access-Control-Allow-Headers']='Content-Type';headers['Access-Control-Allow-Methods']='POST, OPTIONS';}
